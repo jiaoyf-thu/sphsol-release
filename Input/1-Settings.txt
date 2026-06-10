@@ -1,0 +1,76 @@
+// --------------------------------------------------------------------------------
+// VERSION 1.8
+// DATATYPE [I]: INT, [F]: FLOAT, [B]: 0/1, [S]: STRING
+// --------------------------------------------------------------------------------
+// SETTINGS: SOLVER
+// --------------------------------------------------------------------------------
+INTEGRATOR              [S] : LEAP_FROG
+ARTIFICIAL_VISCOSITY    [S] : STANDARD
+ARTIFICIAL_HEAT         [S] : NONE
+ARTIFICIAL_STRESS       [S] : STANDARD
+XSPH                    [S] : STANDARD
+DENSITY_UPDATE          [S] : CONTINUOUS_DENSITY
+NEIGHBOR_SEARCH         [S] : KDTREE
+GRAVITY                 [S] : SELF_GRAVITY
+ADD_FORCE               [B] : 1
+ROTATION                [S] : TARGET
+ROTATION_TARGET         [F] : 0.0E0,0.0E0,0.0E0,0.0E0,0.0E0,-2.908882087E-4
+DAMPING_TIME            [F] : 1.0E4
+SYMMETRIC_BOUNDARY      [S] : NONE
+PLANE_DEFINE            [F] : 0.0E0,0.0E0,-1.0E0,0.0E0
+RELAX                   [B] : 1
+SHOCK                   [B] : 1
+LATE_STAGE              [B] : 0
+// --------------------------------------------------------------------------------
+// SETTINGS: LIMIT
+// --------------------------------------------------------------------------------
+PARTICLES_NUM           [I] : 99998
+PART_NUM                [I] : 2
+PART_MAT_ID             [I] : 10,9
+TOTAL_RUN_TIME          [F] : 1.8E5
+TIMESTEP_REF            [F] : 1.0
+TIMESTEP_LIMIT          [F] : 0.02,10.0
+HSML_REF                [F] : 2.67E4
+HSML_LIMIT              [F] : 0.1,10.0
+VOLUME_MIN              [F] : -1.0E99,-1.0E99,-1.0E99
+VOLUME_MAX              [F] : 1.0E99,1.0E99,1.0E99
+// --------------------------------------------------------------------------------
+// SETTINGS: INPUT
+// --------------------------------------------------------------------------------
+INPUT_ID                [B] : 1
+INPUT_POS               [B] : 1
+INPUT_VEL               [B] : 1
+INPUT_PART              [B] : 1
+INPUT_MASS              [B] : 1
+INPUT_DENSITY           [B] : 1
+INPUT_DENSITY0          [B] : 1
+INPUT_IFLAG             [B] : 0
+INPUT_DAMAGE            [B] : 0
+INPUT_PRESSURE          [B] : 1
+INPUT_ALPHA             [B] : 0
+INPUT_ENERGY            [B] : 1
+INPUT_HSML              [B] : 1
+// --------------------------------------------------------------------------------
+// SETTINGS: OUTPUT
+// --------------------------------------------------------------------------------
+TOTAL_OUTPUT_STEP       [I] : 180
+OUTPUT_POS              [B] : 1
+OUTPUT_VEL              [B] : 1
+OUTPUT_ACC              [B] : 1
+OUTPUT_PRESSURE         [B] : 1
+OUTPUT_PRESSURE_PEAK    [B] : 1
+OUTPUT_STRESS           [B] : 0
+OUTPUT_IFLAG            [B] : 0
+OUTPUT_MASS             [B] : 1
+OUTPUT_DENSITY          [B] : 1
+OUTPUT_ENERGY           [B] : 1
+OUTPUT_ENERGY_PEAK      [B] : 1
+OUTPUT_HSML             [B] : 0
+OUTPUT_C_SOUND          [B] : 0
+OUTPUT_DAMAGE           [B] : 0
+OUTPUT_PART             [B] : 1
+OUTPUT_FRAGMENT         [B] : 0
+OUTPUT_DISTENTION       [B] : 0
+OUTPUT_ROTATION         [B] : 0
+OUTPUT_GRAV             [B] : 0
+// --------------------------------------------------------------------------------

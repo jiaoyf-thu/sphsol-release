@@ -1,0 +1,375 @@
+// --------------------------------------------------------------------------------
+// VERSION 1.7
+// DATATYPE [I]: INT, [F]: FLOAT, [B]: 0/1, [S]: STRING
+// --------------------------------------------------------------------------------
+// MATERIALS NUMBER MUST MATCH THE FOLLOWING DATA!
+// --------------------------------------------------------------------------------
+MATERIAL_NUM            [I] : 11
+// --------------------------------------------------------------------------------
+// MATERIAL 0: NONE
+// --------------------------------------------------------------------------------
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 1: ALUMINUM2700
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 1
+MAT_NAME                [S] : ALUMINUM2700
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : NONE
+ENUM_YIELD              [S] : VON_MISES
+ENUM_DAMAGE             [S] : NONE
+MODULUS_SHEAR           [F] : 2.65E10
+MODULUS_BULK            [F] : 6.91E10
+MODULUS_ELASTIC         [F] : 7.05E10
+@VON_MISES
+Y0                      [F] : 2.75E8
+@TILLOTSON
+COEF_A                  [F] : 5.0E-1
+COEF_B                  [F] : 1.63E0
+ALPHA                   [F] : 5.0E0
+BETA                    [F] : 5.0E0
+MODULUS_A               [F] : 7.52E10
+MODULUS_B               [F] : 6.5E10
+E0                      [F] : 5.0E6
+ECV                     [F] : 1.5E7
+EIV                     [F] : 3.0E6
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 2: BASALT2700
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 2
+MAT_NAME                [S] : BASALT2700
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : NONE
+ENUM_YIELD              [S] : LUND
+ENUM_DAMAGE             [S] : GRADY_KIPP
+MODULUS_SHEAR           [F] : 2.27E10
+MODULUS_BULK            [F] : 2.67E10
+MODULUS_ELASTIC         [F] : 5.31E10
+@LUND
+YI0                     [F] : 1.0E8
+YD0                     [F] : 0.0E0
+YM                      [F] : 3.5E9
+MUI                     [F] : 1.5E0
+MUD                     [F] : 8.0E-1
+@TILLOTSON
+COEF_A                  [F] : 5.0E-1
+COEF_B                  [F] : 1.5E0
+ALPHA                   [F] : 5.0E0
+BETA                    [F] : 5.0E0
+MODULUS_A               [F] : 2.67E10
+MODULUS_B               [F] : 2.67E10
+E0                      [F] : 4.87E8
+ECV                     [F] : 1.82E7
+EIV                     [F] : 4.72E6
+@GRADY_KIPP
+M                       [F] : 8.5E0
+K                       [F] : 5.0E34
+CG_CE                   [F] : 4.0E-1
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 3: NYLON1185
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 3
+MAT_NAME                [S] : NYLON1185
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : NONE
+ENUM_YIELD              [S] : VON_MISES
+ENUM_DAMAGE             [S] : NONE
+MODULUS_SHEAR           [F] : 7.3E7
+MODULUS_BULK            [F] : 1.01E10
+MODULUS_ELASTIC         [F] : 2.19E8
+@VON_MISES
+Y0                      [F] : 1.0E7
+@TILLOTSON
+COEF_A                  [F] : 6.0E-1
+COEF_B                  [F] : 2.0E0
+ALPHA                   [F] : 1.0E1
+BETA                    [F] : 5.0E0
+MODULUS_A               [F] : 1.01E10
+MODULUS_B               [F] : 3.38E10
+E0                      [F] : 7.0E6
+ECV                     [F] : 2.4E6
+EIV                     [F] : 2.0E6
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 4: PUMICE670
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 4
+MAT_NAME                [S] : PUMICE670
+ENUM_EOS                [S] : SIMPLIFIED_TILLOTSON
+ENUM_POROSITY           [S] : P_ALPHA
+ENUM_YIELD              [S] : VON_MISES
+ENUM_DAMAGE             [S] : GRADY_KIPP
+MODULUS_SHEAR           [F] : 2.27E10
+MODULUS_BULK            [F] : 2.67E10
+MODULUS_ELASTIC         [F] : 5.31E10
+@VON_MISES
+Y0                      [F] : 6.0E8
+@SIMPLIFIED_TILLOTSON
+COFF_C                  [F] : 2.0E0
+MODULUS_A               [F] : 2.67E10
+@GRADY_KIPP
+M                       [F] : 9.5E0
+K                       [F] : 8.0E43
+CG_CE                   [F] : 4.0E-1
+@P_ALPHA
+ALPHA0                  [F] : 3.45E0
+RHO_S                   [F] : 2311.5
+PE                      [F] : 1.0E6
+PS                      [F] : 2.13E8
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 5: LUNAR_CRUST2700
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 5
+MAT_NAME                [S] : LUNAR_CRUST2700
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : NONE
+ENUM_YIELD              [S] : LUND
+ENUM_DAMAGE             [S] : GRADY_KIPP
+MODULUS_SHEAR           [F] : 2.27E10
+MODULUS_BULK            [F] : 2.67E10
+MODULUS_ELASTIC         [F] : 5.31E10
+@LUND
+YI0                     [F] : 3.19E7
+YD0                     [F] : 1.0E4
+YM                      [F] : 2.49E9
+MUI                     [F] : 1.1E0
+MUD                     [F] : 7.1E-1
+@TILLOTSON
+COEF_A                  [F] : 5.0E-1
+COEF_B                  [F] : 1.5E0
+ALPHA                   [F] : 5.0E0
+BETA                    [F] : 5.0E0
+MODULUS_A               [F] : 2.67E10
+MODULUS_B               [F] : 2.67E10
+E0                      [F] : 4.87E8
+ECV                     [F] : 1.82E7
+EIV                     [F] : 4.72E6
+@GRADY_KIPP
+M                       [F] : 9.5E0
+K                       [F] : 1.0E30
+CG_CE                   [F] : 4.0E-1
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 6: BOULDER3060
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 6
+MAT_NAME                [S] : BOULDER3060
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : P_ALPHA
+ENUM_YIELD              [S] : LUND
+ENUM_DAMAGE             [S] : GRADY_KIPP
+MODULUS_SHEAR           [F] : 2.27E10
+MODULUS_BULK            [F] : 2.67E10
+MODULUS_ELASTIC         [F] : 5.31E10
+@LUND
+YI0                     [F] : 1.0E7
+YD0                     [F] : 1.0E1
+YM                      [F] : 1.0E9
+MUI                     [F] : 1.0E0
+MUD                     [F] : 6.0E-1
+@TILLOTSON
+COEF_A                  [F] : 5.0E-1
+COEF_B                  [F] : 1.5E0
+ALPHA                   [F] : 5.0E0
+BETA                    [F] : 5.0E0
+MODULUS_A               [F] : 2.67E10
+MODULUS_B               [F] : 2.67E10
+E0                      [F] : 4.87E8
+ECV                     [F] : 1.82E7
+EIV                     [F] : 4.72E6
+@GRADY_KIPP
+M                       [F] : 8.5E0
+K                       [F] : 5.0E34
+CG_CE                   [F] : 4.0E-1
+@P_ALPHA
+ALPHA0                  [F] : 1.1111E0
+RHO_S                   [F] : 3400.0
+PE                      [F] : 1.0E6
+PS                      [F] : 2.13E8
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 7: REGOLITH1700
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 7
+MAT_NAME                [S] : REGOLITH1700
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : P_ALPHA
+ENUM_YIELD              [S] : LUND
+ENUM_DAMAGE             [S] : NONE
+MODULUS_SHEAR           [F] : 2.27E10
+MODULUS_BULK            [F] : 2.67E10
+MODULUS_ELASTIC         [F] : 5.31E10
+@LUND
+YI0                     [F] : 1.0E1
+YD0                     [F] : 1.0E1
+YM                      [F] : 1.0E9
+MUI                     [F] : 6.0E-1
+MUD                     [F] : 6.0E-1
+@TILLOTSON
+COEF_A                  [F] : 5.0E-1
+COEF_B                  [F] : 1.5E0
+ALPHA                   [F] : 5.0E0
+BETA                    [F] : 5.0E0
+MODULUS_A               [F] : 2.67E10
+MODULUS_B               [F] : 2.67E10
+E0                      [F] : 4.87E8
+ECV                     [F] : 1.82E7
+EIV                     [F] : 4.72E6
+@P_ALPHA
+ALPHA0                  [F] : 2.0E0
+RHO_S                   [F] : 3400.0
+PE                      [F] : 1.0E6
+PS                      [F] : 2.0E7
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 8: POROUS1300
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 8
+MAT_NAME                [S] : POROUS1300
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : P_ALPHA
+ENUM_YIELD              [S] : LUND
+ENUM_DAMAGE             [S] : GRADY_KIPP
+MODULUS_SHEAR           [F] : 2.27E10
+MODULUS_BULK            [F] : 2.67E10
+MODULUS_ELASTIC         [F] : 5.31E10
+@LUND
+YI0                     [F] : 1.0E7
+YD0                     [F] : 1.0E1
+YM                      [F] : 1.0E9
+MUI                     [F] : 1.0E0
+MUD                     [F] : 6.0E-1
+@TILLOTSON
+COEF_A                  [F] : 5.0E-1
+COEF_B                  [F] : 1.5E0
+ALPHA                   [F] : 5.0E0
+BETA                    [F] : 5.0E0
+MODULUS_A               [F] : 2.67E10
+MODULUS_B               [F] : 2.67E10
+E0                      [F] : 4.87E8
+ECV                     [F] : 1.82E7
+EIV                     [F] : 4.72E6
+@GRADY_KIPP
+M                       [F] : 9.5E0
+K                       [F] : 8.0E43
+CG_CE                   [F] : 4.0E-1
+@P_ALPHA
+ALPHA0                  [F] : 2.0E0
+RHO_S                   [F] : 2700.0
+PE                      [F] : 1.0E6
+PS                      [F] : 1.0E7
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 9: ICE917
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 9
+MAT_NAME                [S] : ICE917
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : NONE
+ENUM_YIELD              [S] : VON_MISES
+ENUM_DAMAGE             [S] : NONE
+MODULUS_SHEAR           [F] : 3.63E9
+MODULUS_BULK            [F] : 9.47E9
+MODULUS_ELASTIC         [F] : 9.66E9
+@VON_MISES
+Y0                      [F] : 0.0
+@TILLOTSON
+COEF_A                  [F] : 0.3
+COEF_B                  [F] : 0.1
+ALPHA                   [F] : 10.0
+BETA                    [F] : 5.0
+MODULUS_A               [F] : 9.47E9
+MODULUS_B               [F] : 9.47E9
+E0                      [F] : 1.00E7
+ECV                     [F] : 3.04E6
+EIV                     [F] : 7.73E5
+@END
+// --------------------------------------------------------------------------------
+// MATERIAL 10: BASALT2700
+// --------------------------------------------------------------------------------
+@MATERIAL
+MAT_ID                  [I] : 10
+MAT_NAME                [S] : BASALT2700
+ENUM_EOS                [S] : TILLOTSON
+ENUM_POROSITY           [S] : NONE
+ENUM_YIELD              [S] : VON_MISES
+ENUM_DAMAGE             [S] : NONE
+MODULUS_SHEAR           [F] : 2.27E10
+MODULUS_BULK            [F] : 2.67E10
+MODULUS_ELASTIC         [F] : 5.31E10
+@VON_MISES
+Y0                      [F] : 0.0
+@TILLOTSON
+COEF_A                  [F] : 5.0E-1
+COEF_B                  [F] : 1.5E0
+ALPHA                   [F] : 5.0E0
+BETA                    [F] : 5.0E0
+MODULUS_A               [F] : 2.67E10
+MODULUS_B               [F] : 2.67E10
+E0                      [F] : 4.87E8
+ECV                     [F] : 1.82E7
+EIV                     [F] : 4.72E6
+@END
+// --------------------------------------------------------------------------------
+// EXAMPLE ONLY: JUST COPY & MODIFY ANY MODEL BELOW!
+// --------------------------------------------------------------------------------
+// MATERIAL -1: NAME
+// --------------------------------------------------------------------------------
+// @MATERIAL
+// MAT_ID                  [I] : -1
+// MAT_NAME                [S] : NAME
+// ENUM_EOS                [S] : TILLOTSON/SIMPLIFIED_TILLOTSON/GRUNEISEN
+// ENUM_POROSITY           [S] : P_ALPHA/NONE
+// ENUM_YIELD              [S] : VON_MISES/LUND
+// ENUM_DAMAGE             [S] : NONE/GRADY_KIPP
+// MODULUS_SHEAR           [F] : 0.0E0
+// MODULUS_BULK            [F] : 0.0E0
+// MODULUS_ELASTIC         [F] : 0.0E0
+// @TILLOTSON
+// COEF_A                  [F] : 0.0E0
+// COEF_B                  [F] : 0.0E0
+// ALPHA                   [F] : 0.0E0
+// BETA                    [F] : 0.0E0
+// MODULUS_A               [F] : 0.0E0
+// MODULUS_B               [F] : 0.0E0
+// E0                      [F] : 0.0E0
+// ECV                     [F] : 0.0E0
+// EIV                     [F] : 0.0E0
+// @SIMPLIFIED_TILLOTSON
+// COFF_C                  [F] : 0.0E0
+// MODULUS_A               [F] : 0.0E0
+// @GRUNEISEN
+// S                       [F] : 0.0E0
+// C0                      [F] : 0.0E0
+// GAMMA0                  [F] : 0.0E0
+// @P_ALPHA
+// ALPHA0                  [F] : 0.0E0
+// RHO_S                   [F] : 0.0E0
+// PE                      [F] : 0.0E0
+// PS                      [F] : 0.0E0
+// @VON_MISES
+// Y0                      [F] : 0.0E0
+// @LUND
+// YI0                     [F] : 0.0E0
+// YD0                     [F] : 0.0E0
+// YM                      [F] : 0.0E0
+// MUI                     [F] : 0.0E0
+// MUD                     [F] : 0.0E0
+// @GRADY_KIPP
+// M                       [F] : 0.0E0
+// K                       [F] : 0.0E0
+// CG_CE                   [F] : 0.0E0
+// @END
+// --------------------------------------------------------------------------------
