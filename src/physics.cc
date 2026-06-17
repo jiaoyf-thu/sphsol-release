@@ -18,6 +18,7 @@ void EquatonOfState(Particle* particle, const Material& mat)
 
   double pressure    = 0.0;
   double c_pressure2 = 0.0;
+  double pmin        = (mat.yield == YieldEnum::LUND) ? -mat.lund.Yd0 * max(0.0, 1.0 - particle->plastic_strain) / mat.lund.mud : 0.0;
 
   double eta = rho / rho0;
   double mu = eta - 1.0;
@@ -43,7 +44,8 @@ void EquatonOfState(Particle* particle, const Material& mat)
       if (eta >= 1.0 || energy <= para.Eiv)
       {
         pressure = (para.a + para.b / omg) * rho * energy + mu * (para.A + mu * para.B);
-        pressure = pressure < 0.0 ? pressure * (1.0 - particle->damage) : pressure;
+        // pressure = pressure < 0.0 ? pressure * (1.0 - particle->damage) : pressure;
+        pressure = max(pressure, pmin);
 
         c_pressure2 = (1.0 + para.a + para.b / omg) * pressure / rho + (2.0 * energy - pressure / rho) * 
             para.b * (omg - 1.0) / pow2(omg) + (para.A + para.B * (pow2(eta) - 1.0)) / rho;
@@ -55,7 +57,7 @@ void EquatonOfState(Particle* particle, const Material& mat)
       {
         pressure = para.a * rho * energy + (para.b * rho * energy / omg + para.A * mu * exp(-para.beta * nu)) *
             exp(-para.alpha * nu * nu);
-        pressure = pressure < 0.0 ? pressure * (1.0 - particle->damage) : pressure;
+        pressure = max(pressure, pmin);
         
         c_pressure2 = (1.0 + para.a + para.b / omg * exp(-para.alpha * nu * nu)) * pressure / rho + 
             exp(-para.alpha * nu * nu) * (((2 * energy - pressure / rho) / (para.E0 * rho) + 
@@ -74,7 +76,7 @@ void EquatonOfState(Particle* particle, const Material& mat)
             exp(-para.alpha * nu * nu);
 
         pressure = (pe * (energy - para.Eiv) + pc * (para.Ecv - energy)) / (para.Ecv - para.Eiv);
-        pressure = pressure < 0.0 ? pressure * (1.0 - particle->damage) : pressure;
+        pressure = max(pressure, pmin);
 
         double cc2 = (1.0 + para.a + para.b / omg) * pressure / rho + (2.0 * energy - pressure / rho) * para.b * 
             (omg - 1.0) / pow2(omg) + (para.A + para.B * (pow2(eta) - 1.0)) / rho;
@@ -96,8 +98,8 @@ void EquatonOfState(Particle* particle, const Material& mat)
   {
     pressure = mat.sim_tillotson.c * rho * energy + mat.sim_tillotson.A * mu;
     // pressure = mat.sim_tillotson.A * mu;
-    pressure = pressure < 0.0 ? pressure * (1.0 - particle->damage) : pressure;
-    
+    pressure = max(pressure, pmin);
+
     // c_pressure2 = mat.sim_tillotson.c * (energy + pressure / rho) + mat.sim_tillotson.A / rho0;
     c_pressure2 = mat.sim_tillotson.A / rho;
     break;
@@ -109,7 +111,7 @@ void EquatonOfState(Particle* particle, const Material& mat)
   case(EosEnum::ELASTIC):
   {
     pressure = mat.bulk_modulus * mu;
-    pressure = pressure < 0.0 ? pressure * (1.0 - particle->damage) : pressure;
+    pressure = max(pressure, pmin);
     c_pressure2 = mat.bulk_modulus / rho;
     break;
   }
@@ -225,7 +227,7 @@ double EquatonOfStateCold(const Particle* particle, const Material& mat)
 //--------------------------------------------------------------------------------------------------
 // Strength model
 //--------------------------------------------------------------------------------------------------
-double StrengthModel(const Material& mat, double damage, double J2, double pressure)
+double StrengthModel(const Material& mat, double damage, double J2, double pressure, double plastic_strain)
 {
   double f = 1.0;
   switch (mat.yield)
@@ -239,9 +241,10 @@ double StrengthModel(const Material& mat, double damage, double J2, double press
   }
   case(YieldEnum::LUND):
   {
-    double yield_strength_intact = mat.lund.Yi0 + mat.lund.mui * pressure / (1.0 + mat.lund.mui * pressure / (mat.lund.Ym - mat.lund.Yi0));
+    double weaken_factor = max(0.0, 1.0 - plastic_strain);
+    double yield_strength_intact = mat.lund.Yi0 * weaken_factor + mat.lund.mui * pressure / (1.0 + mat.lund.mui * pressure / (mat.lund.Ym - mat.lund.Yi0));
     // Limit Yd <= Yi
-    double yield_strength_damage = min(mat.lund.Yd0 + mat.lund.mud * pressure, yield_strength_intact);
+    double yield_strength_damage = min(mat.lund.Yd0 * weaken_factor + mat.lund.mud * pressure, yield_strength_intact);
     // Limit Y >= 0.0
     double yield_strength = max(yield_strength_intact * (1.0 - damage) + yield_strength_damage * damage, 0.0);
     // Yield conditon: Y / sqrt(J2) > 1

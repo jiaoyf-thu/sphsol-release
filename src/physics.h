@@ -15,7 +15,7 @@ double EquatonOfStateCold(const Particle* particle, const Material& mat);
 //--------------------------------------------------------------------------------------------------
 // Strength model
 //--------------------------------------------------------------------------------------------------
-double StrengthModel(const Material& mat, double damage, double J2, double pressure = 0.0);
+double StrengthModel(const Material& mat, double damage, double J2, double pressure = 0.0, double plastic_strain = 0.0);
 
 
 //--------------------------------------------------------------------------------------------------

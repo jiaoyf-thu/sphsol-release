@@ -363,6 +363,9 @@ void Solver::ShockRun()
           particles_[p].dev_stress = f * dev_stress_temp;
           particles_[p].stress = particles_[p].dev_stress - particles_[p].pressure * Mat3d::Identity();
 
+          // plastic strain accumulate
+          particles_[p].plastic_strain += (1.0-f) * sqrt(J2/3.0) / mat.shear_modulus;
+
           // Damage accumulate
           if (mat.damage == DamageEnum::GRADY_KIPP)
           {
