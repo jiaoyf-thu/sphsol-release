@@ -359,7 +359,7 @@ void Solver::ShockRun()
           // stress update
           Mat3d dev_stress_temp = particles_[p].dev_stress + particles_[p].ddev_stress_dt * dt_;
           double J2 = 0.5 * (dev_stress_temp.array() * dev_stress_temp.array()).sum();
-          double f = StrengthModel(mat, particles_[p].damage, J2, particles_[p].pressure);
+          double f = StrengthModel(mat, particles_[p].damage, J2, particles_[p].pressure, particles_[p].plastic_strain);
           particles_[p].dev_stress = f * dev_stress_temp;
           particles_[p].stress = particles_[p].dev_stress - particles_[p].pressure * Mat3d::Identity();
 
@@ -515,15 +515,20 @@ void Solver::LateRun()
           double alpha0 = (mat.porosity == PorosityEnum::P_ALPHA) ? mat.p_alpha.alpha0 : 1.0;
           double mu = (particles_[p].rho * alpha) / (particles_[p].rho0 * alpha0) - 1.0;
           double pressure = mat.bulk_modulus * particles_[p].alpha_inv * mu;
-          particles_[p].pressure = pressure < 0.0 ? pressure * (1.0 - particles_[p].damage) : pressure;
-          particles_[p].c_sound = sqrt(mat.bulk_modulus * particles_[p].alpha_inv / particles_[p].rho);
+          double pmin = (mat.yield == YieldEnum::LUND) ? -mat.lund.Yd0 * max(0.0, 1.0 - particles_[p].plastic_strain) / mat.lund.mud : 0.0;
+
+          // particles_[p].pressure = pressure < 0.0 ? pressure * (1.0 - particles_[p].damage) : pressure;
+          particles_[p].pressure = max(pressure, pmin);
+          particles_[p].c_sound  = sqrt(mat.bulk_modulus * particles_[p].alpha_inv / particles_[p].rho);
 
           // stress update
           Mat3d dev_stress_temp = particles_[p].dev_stress + particles_[p].ddev_stress_dt * dt_;
           double J2 = 0.5 * (dev_stress_temp.array() * dev_stress_temp.array()).sum();
-          double f = StrengthModel(mat, particles_[p].damage, J2, particles_[p].pressure);
+          double f = StrengthModel(mat, particles_[p].damage, J2, particles_[p].pressure, particles_[p].plastic_strain);
           particles_[p].dev_stress = f * dev_stress_temp;
           particles_[p].stress = particles_[p].dev_stress - particles_[p].pressure * Mat3d::Identity();
+
+          // assume no strain increase in the late stage
         }
 
         ComputeDvDt();
